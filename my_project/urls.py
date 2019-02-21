@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from apps.ewallet.views import home, contact
+from apps.ewallet import views as ewallet_views
+from apps.user_profile import views as user_profile_views
+
+
 urlpatterns = [
-	path('', home),
-	path('contact/', contact),
+	path('', ewallet_views.home, name='home'),
+	path('contact/', ewallet_views.contact),
+	path('signup/', user_profile_views.signup),
     path('admin/', admin.site.urls),
 ]
