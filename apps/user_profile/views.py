@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import CreateView
+
+from .models import Transaction
 
 
 def signup(request):
@@ -19,3 +22,11 @@ def signup(request):
 		'form': signup_form,
 	}
 	return render(request, template_name, context)
+
+# class based view use
+class TransactionView(CreateView):
+	model = Transaction
+	template_name = 'transaction.html'
+	fields = ('from_user', 'to_user', 'amount')
+	context_object_name = 'form'
+	success_url = '/'
